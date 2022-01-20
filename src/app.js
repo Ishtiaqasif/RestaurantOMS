@@ -2,8 +2,23 @@ require('reflect-metadata');
 const TestService = require("./services/test.service");
 const express = require('express');
 const { appRouter } = require('./routes/app.router');
-const {Container} = require('typedi');
+const { Container } = require('typedi');
 
+const mongoose = require("mongoose");
+
+const connectDB = async () => {
+  try {
+    console.log("MOngo url: ", process.env.MONGO_URL);
+    const dbInstance = mongoose.connect("mongodb+srv://courier:test12345@courier-service.hhqw5.mongodb.net/courier-service?w=majorityretryWrites=true");
+
+    console.log("Mongo DB connected!");
+    return dbInstance;
+  } catch (e) {
+    console.log("Error occured connceting db. Error: ", e);
+  }
+};
+connectDB();
+// module.exports = { connectDB };
 
 const app = express();
 const port = process.env.PORT || 4000;
