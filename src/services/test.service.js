@@ -1,4 +1,4 @@
-const  {Container}  = require('typedi');
+//const  { Container }  = require('typedi');
 
 class TestService
 {

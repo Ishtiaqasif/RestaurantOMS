@@ -1,10 +1,11 @@
 const router = require("express").Router();
+
 const healthController = require("../controllers/health.controller");
 const testController = require("../controllers/test.controller");
 
 
 router
-    .get("/health", (req, res) =>new healthController().checkHealth(req, res))
+    .get("/health", (req, res) => new healthController().checkHealth(req, res))
     ;
 
 router

@@ -1,9 +1,10 @@
-const  {Container}  = require('typedi');
+const {Container} = require('typedi');
+const TestService = require('../services/test.service');
 
 class TestController
 {
     constructor(){
-        this.service = Container.get('TestService');
+        this.service = Container.get(TestService);
     }
 
     get(req, res){

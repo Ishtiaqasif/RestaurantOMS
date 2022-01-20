@@ -2,11 +2,13 @@ require('reflect-metadata');
 const TestService = require("./services/test.service");
 const express = require('express');
 const { appRouter } = require('./routes/app.router');
-const Container = require('typedi').Container;
+const {Container} = require('typedi');
+
+
 const app = express();
 const port = process.env.PORT || 4000;
 
-Container.set('TestService', new TestService());
+Container.set(TestService, new TestService());
 
 
 
