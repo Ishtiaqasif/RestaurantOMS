@@ -9,7 +9,6 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
     try {
-        console.log("MOngo url: ", process.env.MONGO_URL);
         const dbInstance = mongoose.connect(
             "mongodb+srv://courier:test12345@courier-service.hhqw5.mongodb.net/courier-service?w=majorityretryWrites=true"
         );
@@ -27,7 +26,6 @@ const port = process.env.PORT || 4000;
 connectDB();
 
 Container.set(TestRepository, new TestRepository());
-
 Container.set(TestService, new TestService());
 
 app.use(express.json());

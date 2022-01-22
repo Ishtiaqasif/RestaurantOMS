@@ -1,36 +1,39 @@
 const TestRepository = require("../repositories/test.repository");
 const { Container } = require("typedi");
+const Test = require("../models/entities/test.entity");
 
 class TestService
 {
-    repository = null;
     constructor(){
        this.repository = Container.get(TestRepository);
     }
     
-    getObjects(){
-        return this.repository.read();
+    async getObjects(){
+        return await this.repository.findMany({});
     }
     
-    getObjectById(id){
-        return this.objects.find(x => x.id == id);
+    async getObjectById(id){
+        return this.repository.findById(x => x.id == id);
     }
 
-    addObject(object){
-        this.repository.insert(object);
+    async addObject(object){
+        
+        let test = new Test();
+        test = {...test, ...object};
+        return await this.repository.insert(test);
     }
 
-    replaceObject(id, object){
+    async replaceObject(id, object){
         let index = this.objects.findIndex(x => x.id == id);
         this.objects[index] = object;
     }
 
-    deleteObject(id){
+    async deleteObject(id){
         let index = this.objects.findIndex(x => x.id == id);
         this.objects.splice(index, 1);
     }
 
-    patchObject(id, object){
+    async patchObject(id, object){
         let index = this.objects.findIndex(x => x.id == id);
         let objectToBePatched = this.objects[index];
 

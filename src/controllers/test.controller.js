@@ -1,4 +1,5 @@
 const { Container } = require("typedi");
+const Test = require("../models/entities/test.entity");
 const TestService = require("../services/test.service");
 
 class TestController {
@@ -6,8 +7,8 @@ class TestController {
         this.service = Container.get(TestService);
     }
 
-    get(req, res) {
-        let objects = this.service.getObjects();
+    async get(req, res) {
+        let objects = await this.service.getObjects();
         return res.status(200).send(objects);
     }
 
@@ -17,8 +18,8 @@ class TestController {
         return res.status(200).send(object);
     }
 
-    post(req, res) {
-        this.service.addObject(req.body);
+    async post(req, res) {
+        await this.service.addObject(req.body);
         return res.status(201).send(req.body);
     }
 
