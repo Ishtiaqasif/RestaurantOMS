@@ -1,25 +1,15 @@
-//const  { Container }  = require('typedi');
+const TestRepository = require("../repositories/test.repository");
+const { Container } = require("typedi");
 
 class TestService
 {
-    constructor(){}
-    objects = [
-        {
-            id: 1,
-            name: "Test 1"
-        },
-        {
-            id: 2,
-            name: "Test 2"
-        },
-        {
-            id: 3,
-            name: "Test 3"
-        }
-    ];
+    repository = null;
+    constructor(){
+       this.repository = Container.get(TestRepository);
+    }
     
     getObjects(){
-        return this.objects;
+        return this.repository.read();
     }
     
     getObjectById(id){
@@ -27,7 +17,7 @@ class TestService
     }
 
     addObject(object){
-        this.objects.push(object);
+        this.repository.insert(object);
     }
 
     replaceObject(id, object){

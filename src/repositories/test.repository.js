@@ -1,31 +1,32 @@
-const  { Container }  = require('typedi');
+const mongoose = require ("mongoose");
+const TestSchema  = require('../models/schemas/test.schema');
 
 class TestRepository
 {
-    dbContext = null;
-
     constructor(){
-         this.dbContext = Container.get('dbContext');
+        this.schema = mongoose.model("tests", TestSchema);
     }
 
     insert(object){
-        this.dbContext.test.insert(object);
+        console.log('hhh');
+        this.schema.insert(object);
     }
 
     read(id){
-        return this.dbContext.test.findById(id);
+
+        return this.schema.find();
     }
     
     update(id, object){
-        this.dbContext.test.update(id, object);
+        //this.dbInstants.test.update(id, object);
     }
 
     delete(id){
-        this.dbContext.test.delete(id);
+        //this.dbInstants.test.delete(id);
     }
 
     replace(id, object){
-        this.dbContext.test.replace(id, object);
+        //this.dbInstants.test.replace(id, object);
     }
     
     
