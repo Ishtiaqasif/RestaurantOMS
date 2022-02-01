@@ -29,8 +29,10 @@ Container.set(TestRepository, new TestRepository());
 Container.set(TestService, new TestService());
 
 app.use(express.json());
+
 app.use("/api", appRouter);
 
 app.listen(port, () => {
     console.log(`restaurant-oms listening at http://localhost:${port}`);
 });
+

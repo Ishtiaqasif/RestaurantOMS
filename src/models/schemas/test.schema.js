@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const Test = require("../../models/entities/test.entity");
+const BaseEntity = require("../entities/bases/base.entity");
+const Test = require("../entities/test.entity");
 
-const TestSchema = new Schema(Test.getSchema(), {
+const TestSchema = new Schema(Test.getSchema(), 
+{
     writeConcern: {
         w: "majority",
         j: true,

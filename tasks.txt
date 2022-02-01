@@ -1,0 +1,9 @@
+1. Basic Structure
+    a) base object for db entities - 1
+    b) schema defining - 1
+    c) common responses - 0
+    d) global error handling - 1
+    e) jwt auth - 0
+2. Controller
+    a) request validation - 0
+

@@ -3,11 +3,12 @@ const TestSchema  = require('../models/schemas/test.schema');
 
 class BaseRepository 
 {
-    constructor(collectionName, schema){
+    constructor(collectionName, schema, initializedObject){
+        this.initializedObject = initializedObject;
         this.schema = mongoose.model(collectionName, schema);
     }
 
-    insert = async (object) => await this.schema.create(object);
+    insert = async (object) => await this.schema.create({...this.initializedObject, ...object});
 
     insertMany = async (objects) => await this.schema.insertMany(objects);
 

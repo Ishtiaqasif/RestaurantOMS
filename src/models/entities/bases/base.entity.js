@@ -1,16 +1,19 @@
 class BaseEntity {
   
-  constructor() {
-    this.createdAt = new Date();
-    this.updatedAt = null;
-    this.isDeleted = false;
+  constructor(){
   }
-
   static getBaseSchema() {
     return {
       createdAt: Date,
       updatedAt: Date,
       isDeleted: Boolean
+    };
+  }
+  static getInitializedBaseObject() {
+    return {
+      createdAt: new Date(),
+      updatedAt: null,
+      isDeleted: false
     };
   }
 } 

@@ -1,19 +1,21 @@
 const BaseEntity = require('./bases/base.entity');
 
-class Test extends BaseEntity
+class Test
 {
-    constructor(){
-        super();
-        this.name = "";
-        this.description = "";
-    }
     static getSchema(){
         return {
-            ...this.getBaseSchema(),
-            name: String,
-            description: String
-        };
-    }   
+            name: Number,
+            description: String,
+            metadata: BaseEntity.getBaseSchema(),
+        }
+    } 
+    static getInitializedObject(){ 
+        return {
+            name: "",
+            description: "",
+            metadata: BaseEntity.getInitializedBaseObject(),
+        }
+    } 
 }
 
 module.exports = Test;
