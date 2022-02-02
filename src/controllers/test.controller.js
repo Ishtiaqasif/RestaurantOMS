@@ -19,8 +19,8 @@ class TestController {
     }
 
     async post(req, res) {
-        await this.service.addObject(req.body);
-        return res.status(201).send(req.body);
+        let result = await this.service.addObject(req.body);
+        return res.status(201).send(result);
     }
 
     put(req, res) {
