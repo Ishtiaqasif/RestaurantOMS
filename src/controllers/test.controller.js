@@ -1,5 +1,8 @@
 const { Container } = require("typedi");
 const Test = require("../models/entities/test.entity");
+const BadRequestError = require("../models/errors/client-errors/bad-request.error");
+const ForbiddenError = require("../models/errors/client-errors/forbidden.error");
+const NotFoundError = require("../models/errors/client-errors/not-found.error");
 const TestService = require("../services/test.service");
 
 class TestController {
@@ -8,6 +11,8 @@ class TestController {
     }
 
     async get(req, res) {
+        throw new NotFoundError("Custom Not Found.");
+        //throw new ForbiddenError("Custom Forbidden.");
         let objects = await this.service.getObjects();
         return res.status(200).send(objects);
     }

@@ -1,9 +1,11 @@
 1. Basic Structure
     a) base object for db entities - 1
     b) schema defining - 1
-    c) common responses - 0
-    d) global error handling - 0
-    e) jwt auth - 0
+    c) common responses - 1/2
+    d) global error handling - 1/2
+    e) custom error handling classes - 1/2
+    f) api logging - 0
+    ) jwt auth - 0
 2. Controller
     a) request validation - 0
 
