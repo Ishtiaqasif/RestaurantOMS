@@ -14,5 +14,8 @@
     "mongoose": "^6.1.7",
     "reflect-metadata": "^0.1.13",
     "typedi": "^0.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
