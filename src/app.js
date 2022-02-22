@@ -12,6 +12,7 @@ const { appRouter } = require("./routes/app.router");
 const { Container } = require("typedi");
 const mongoose = require("mongoose");
 const ApplicationError = require("./models/errors/application.error");
+const { errorLogger, errorHandler } = require("./middleware/error-handler.middleware");
 
 const connectDB = async () => {
     try {
@@ -38,20 +39,8 @@ app.use(express.json());
 
 app.use("/api", appRouter);
 
-app.use((err, req, res, next) => {
-    if (err instanceof ApplicationError) {
-        new ApplicationResponse(null, err.statusCode, err).sent(res);
-     }
-    
-    else {
-        return res.status(500).json({
-            status: 500,
-            message: err.message,
-            data: err,
-        });
-    }
-    
-});
+app.use(errorLogger);
+app.use(errorHandler);
 
 // process.on('unhandledRejection', (reason, p) => {throw new Error()});
 // process.on('uncaughtException', (err) => {

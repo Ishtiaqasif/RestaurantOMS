@@ -1,11 +1,22 @@
-1. Basic Structure
-    a) base object for db entities - 1
-    b) schema defining - 1
-    c) common responses - 1/2
-    d) global error handling - 1/2
-    e) custom error handling classes - 1/2
-    f) api logging - 0
-    ) jwt auth - 0
-2. Controller
-    a) request validation - 0
+[1] Basic Structure
 
+[x] base object for db entities - 1
+[x] schema defining - 1
+[x] common responses - 2/2
+[x] global error handling - 2/2
+[x] custom error handling classes - 2/2
+[ ] winston configuring - 0
+[ ] api logging - 0
+[ ] unit testing
+[ ] mongoose testing
+[ ] jwt auth - 0
+
+
+[2]Controller
+
+[ ] request validation(joy) - 0
+
+
+[3] Key Feature 
+
+[ ] Scanning QR codes rather than providing tabs for each restaurant tables.

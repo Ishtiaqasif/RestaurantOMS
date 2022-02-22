@@ -6,9 +6,7 @@ class ApplicationResponse {
         this.data = data;
         this.statusCode = statusCode;
         this.error = error;
-        this.isSuccessful = Object.values(httpStatusCodes.SUCCESS).includes(
-            statusCode
-        );
+        this.isSuccessful = Object.values(httpStatusCodes.SUCCESS).includes( statusCode );
     }
 
     sent = res => res.status(this.statusCode).json(this);

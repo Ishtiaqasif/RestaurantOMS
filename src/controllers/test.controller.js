@@ -11,8 +11,8 @@ class TestController {
     }
 
     async get(req, res) {
-        throw new NotFoundError("Custom Not Found.");
-        //throw new ForbiddenError("Custom Forbidden.");
+        //throw new NotFoundError("Custom Not Found.");
+        throw new Error("SystemError");
         let objects = await this.service.getObjects();
         return res.status(200).send(objects);
     }

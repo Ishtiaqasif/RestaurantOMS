@@ -5,9 +5,9 @@ class InternalServerError extends ApplicationError {
     constructor(
         errorMessage = "Something went wrong",
         errorName = "Internal Server Error",
-        httpStatusCode = httpStatusCodes.SERVER_ERROR.INTERNAL_SERVER_ERROR
+        statusCode = httpStatusCodes.SERVER_ERROR.INTERNAL_SERVER_ERROR
     ) {
-        super(errorMessage, errorName, httpStatusCode);
+        super(errorMessage, errorName, statusCode);
     }
 }
 
