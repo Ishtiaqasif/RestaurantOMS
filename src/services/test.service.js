@@ -13,26 +13,15 @@ class TestService
     
     getObjectById = async (id) => await this.repository.findById(id);
 
-    async addObject(object){
-        return await this.repository.insert(object);
-    }
+    addObject = async (object) => await this.repository.insert(object);
 
-    async replaceObject(id, object){
-        let index = this.objects.findIndex(x => x.id == id);
-        this.objects[index] = object;
-    }
+    replaceObject = async (id, object) => await this.repository.findOneAndUpdate(id, object);
 
-    async deleteObject(id){
-        let index = this.objects.findIndex(x => x.id == id);
-        this.objects.splice(index, 1);
-    }
+    deleteObject = async (id) => await this.repository.delete(id);
 
-    async patchObject(id, object){
-        let index = this.objects.findIndex(x => x.id == id);
-        let objectToBePatched = this.objects[index];
+    softDeleteObject = async (id) => await this.repository.softDeleteById(id);
 
-        objectToBePatched["name"] = object["name"];
-    }
+    patchObject = async (id, object) => await this.repository.updateSet(id, object);
 }
 
 module.exports =  TestService;

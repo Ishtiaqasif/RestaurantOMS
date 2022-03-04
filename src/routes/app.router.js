@@ -10,11 +10,12 @@ router
 
 router
     .get("/test",async (req, res) => await new testController().get(req, res))
-    .get("/test/:id", (req, res) => new testController().getById(req, res))
+    .get("/test/:id", async (req, res) => await new testController().getById(req, res))
     .post("/test",async (req, res) => await new testController().post(req, res))
-    .put("/test/:id", (req, res) => new testController().put(req, res))
-    .delete("/test/:id", (req, res) => new testController().delete(req, res))
-    .patch("/test/:id", (req, res) => new testController().patch(req, res))
+    .put("/test/:id", async(req, res) => await new testController().put(req, res))
+    .delete("/test/:id", async (req, res) => await new testController().delete(req, res))
+    .patch("/test/:id", async (req, res) => await new testController().patch(req, res))
+    .patch("/softdelete/:id", async (req, res) => await new testController().softDelete(req, res))
     ;
 
 module.exports = { appRouter: router };

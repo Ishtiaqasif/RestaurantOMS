@@ -16,30 +16,32 @@ class TestController {
 
     async getById(req, res) {
         let object = await this.service.getObjectById(req.params.id);
-        console.log({ 'controller': object });
         appResponse.send(res, object, httpStatusCodes.SUCCESS.OK);
     }
 
     async post(req, res) {
-        let result = await this.service.addObject(req.body);
-        return res.status(201).send(result);
+        let object = await this.service.addObject(req.body);
+        appResponse.send(res, object, httpStatusCodes.SUCCESS.OK);
     }
 
-    put(req, res) {
-        this.service.replaceObject(req.params.id, req.body);
-        let updatedObject = this.service.getObjectById(req.params.id);
-        return res.status(200).send(updatedObject);
+    async put(req, res) {
+        let object = await this.service.replaceObject(req.params.id, req.body);
+        appResponse.send(res, object, httpStatusCodes.SUCCESS.OK);
     }
 
-    delete(req, res) {
-        this.service.deleteObject(req.params.id);
-        return res.status(200).send();
+    async delete(req, res) {
+        await this.service.deleteObject(req.params.id);
+        appResponse.send(res, {'message': 'data deleted successfully'}, httpStatusCodes.SUCCESS.OK);
     }
 
-    patch(req, res) {
-        this.service.patchObject(req.params.id, req.body);
-        let updatedObject = this.service.getObjectById(req.params.id);
-        return res.status(200).send(updatedObject);
+    async patch(req, res) {
+        let object = await this.service.patchObject(req.params.id, req.body);
+        appResponse.send(res, object, httpStatusCodes.SUCCESS.OK);
+    }
+    
+    async softDelete(req, res) {
+        await this.service.softDeleteObject(req.params.id);
+        appResponse.send(res, {'message': 'data deleted successfully'}, httpStatusCodes.SUCCESS.OK);
     }
 }
 
