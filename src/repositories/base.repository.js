@@ -14,7 +14,7 @@ class BaseRepository
 
     findMany = async (query) => await this.schema.find(query);
     
-    findById = async () => await this.schema.findById(id);
+    findById = async (id) => await this.schema.findById(id);
     
     updateOne = async(id, object) => await this.schema.updateOne({_id: id}, object);
 

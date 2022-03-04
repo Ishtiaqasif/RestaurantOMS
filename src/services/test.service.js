@@ -9,13 +9,9 @@ class TestService
        this.repository = Container.get(TestRepository);
     }
     
-    async getObjects(){
-        return await this.repository.findMany({});
-    }
+    getObjects = async () => await this.repository.findMany({});
     
-    async getObjectById(id){
-        return this.repository.findById(x => x.id == id);
-    }
+    getObjectById = async (id) => await this.repository.findById(id);
 
     async addObject(object){
         return await this.repository.insert(object);
