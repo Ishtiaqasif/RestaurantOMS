@@ -2,15 +2,17 @@
 const httpStatusCodes = require("../enums/http-status-codes");
 
 class ApplicationResponse {
-    constructor(data, statusCode, error) {
-        this.data = data;
-        this.statusCode = statusCode;
-        this.error = error;
-        this.isSuccessful = Object.values(httpStatusCodes.SUCCESS).includes( statusCode );
-    }
-
-    sent = res => res.status(this.statusCode).json(this);
+   
+    send = (res, data, statusCode, error = null) => {
+        let response = {
+            data,
+            statusCode,
+            error,
+            isSuccessful: Object.values(httpStatusCodes.SUCCESS).includes( statusCode ),
+        }
+        
+        return  res.status(statusCode).json(response)};
     
 }
 
-module.exports = ApplicationResponse;
+module.exports = new ApplicationResponse();

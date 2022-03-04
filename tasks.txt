@@ -5,7 +5,7 @@
 [x] common responses - 2/2
 [x] global error handling - 2/2
 [x] custom error handling classes - 2/2
-[ ] winston configuring - 0
+[x] winston configuring - 0
 [ ] api logging - 0
 [ ] unit testing
 [ ] mongoose testing

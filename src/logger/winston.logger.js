@@ -5,12 +5,9 @@ const logConfiguration = {
     transports: [
         new winston.transports.File({
             level: 'error',
-            filename: 'logs/error.log',   
-            format: winston.format.simple(),     
+            filename: 'logs/error.log'    
         }),
-        new winston.transports.Console({
-            format: winston.format.cli(),
-        })
+        new winston.transports.Console({})
     ]
 };
 

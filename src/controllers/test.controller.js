@@ -1,26 +1,23 @@
 const { Container } = require("typedi");
-const Test = require("../models/entities/test.entity");
-const BadRequestError = require("../models/errors/client-errors/bad-request.error");
-const ForbiddenError = require("../models/errors/client-errors/forbidden.error");
-const NotFoundError = require("../models/errors/client-errors/not-found.error");
+const httpStatusCodes = require("../models/enums/http-status-codes");
 const TestService = require("../services/test.service");
-
+const appResponse = require("../models/responses/application.response");
+const ApplicationError = require("../models/errors/application.error");
+const UnauthorizedError = require("../models/errors/client-errors/unauthorized.error");
 class TestController {
     constructor() {
         this.service = Container.get(TestService);
     }
 
     async get(req, res) {
-        //throw new NotFoundError("Custom Not Found.");
-        throw new Error("SystemError");
         let objects = await this.service.getObjects();
-        return res.status(200).send(objects);
+        appResponse.send(res, objects, httpStatusCodes.SUCCESS.OK);
     }
 
-    getById(req, res) {
-        console.log(req.params.id);
-        let object = this.service.getObjectById(req.params.id);
-        return res.status(200).send(object);
+    async getById(req, res) {
+        let object = await this.service.getObjectById(req.params.id);
+        console.log({ 'controller': object });
+        appResponse.send(res, object, httpStatusCodes.SUCCESS.OK);
     }
 
     async post(req, res) {
