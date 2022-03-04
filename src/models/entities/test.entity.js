@@ -4,7 +4,7 @@ class Test
 {
     static getSchema(){
         return {
-            name: Number,
+            name: String,
             description: String,
             metadata: BaseEntity.getBaseSchema(),
         }
