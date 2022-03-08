@@ -3,7 +3,7 @@ const httpStatusCodes = require("../models/enums/http-status-codes");
 const TestService = require("../services/test.service");
 const appResponse = require("../models/responses/application.response");
 const ApplicationError = require("../models/errors/application.error");
-const UnauthorizedError = require("../models/errors/client-errors/unauthorized.error");
+const NotFoundError = require("../models/errors/client-errors/not-found.error");
 class TestController {
     constructor() {
         this.service = Container.get(TestService);
@@ -11,7 +11,11 @@ class TestController {
 
     async get(req, res) {
         let objects = await this.service.getObjects();
+        
+        if(objects.length == 0) throw new NotFoundError();
+        
         appResponse.send(res, objects, httpStatusCodes.SUCCESS.OK);
+
     }
 
     async getById(req, res) {
@@ -42,6 +46,8 @@ class TestController {
     async softDelete(req, res) {
         await this.service.softDeleteObject(req.params.id);
         appResponse.send(res, {'message': 'data deleted successfully'}, httpStatusCodes.SUCCESS.OK);
+
+
     }
 }
 

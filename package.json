@@ -10,11 +10,13 @@
   "author": "Asif Ishtiaq, Tanvir Alam",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
     "mongoose": "^6.1.7",
     "reflect-metadata": "^0.1.13",
-    "typedi": "^0.10.0"
+    "typedi": "^0.10.0",
+    "winston": "^3.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

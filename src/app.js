@@ -1,44 +1,28 @@
 require("reflect-metadata");
 require("express-async-errors");
-const BadRequestError = require("./models/errors/client-errors/bad-request.error");
-const UnauthorizedError = require("./models/errors/client-errors/unauthorized.error");
-const ForbiddenError = require("./models/errors/client-errors/forbidden.error");
-const NotFoundError = require("./models/errors/client-errors/not-found.error");
-const ApplicationResponse = require("./models/responses/application.response");
+require('dotenv').config();
+const express = require("express");
+const { Container } = require("typedi");
+
 const TestService = require("./services/test.service");
 const TestRepository = require("./repositories/test.repository");
-const express = require("express");
 const { appRouter } = require("./routes/app.router");
-const { Container } = require("typedi");
-const mongoose = require("mongoose");
-const ApplicationError = require("./models/errors/application.error");
 const { errorLogger, errorHandler } = require("./middleware/error-handler.middleware");
+const connectDb = require("./config/dbConnection.config");
 
-const connectDB = async () => {
-    try {
-        const dbInstance = mongoose.connect(
-            "mongodb+srv://courier:test12345@courier-service.hhqw5.mongodb.net/courier-service?w=majorityretryWrites=true"
-        );
-
-        console.log("Mongo DB connected!");
-        return dbInstance;
-    } catch (e) {
-        console.log("Error occurred connecting db. Error: ", e);
-    }
-};
-
+//express
 const app = express();
-const port = process.env.PORT || 4000;
 
-connectDB();
+//db connection
+connectDb();
 
+//dependency injections
 Container.set(TestRepository, new TestRepository());
 Container.set(TestService, new TestService());
 
+//middlewares
 app.use(express.json());
-
 app.use("/api", appRouter);
-
 app.use(errorLogger);
 app.use(errorHandler);
 
@@ -48,6 +32,6 @@ app.use(errorHandler);
 //     process.exit(1);
 // });
 
-app.listen(port, () => {
-    console.log(`restaurant-oms listening at http://localhost:${port}`);
-});
+//listener 
+let port = process.env.PORT || 3000;
+app.listen(port, () => { console.log(`${process.env.APP_NAME} listening at http://localhost:${port}`);});

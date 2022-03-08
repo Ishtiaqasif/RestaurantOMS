@@ -25,7 +25,7 @@ let errorLogger = (err, req, res, next) => {
 
 let errorHandler = (err, req, res, next) => {
     if (!(err instanceof ApplicationError)) err = new InternalServerError();
-    appResponse.send(res,null, err.statusCode, err);
+    appResponse.send(res, null, err.statusCode, err.message);
 };
 
 

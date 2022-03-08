@@ -5,7 +5,8 @@
 [x] common responses - 2/2
 [x] global error handling - 2/2
 [x] custom error handling classes - 2/2
-[x] winston configuring - 0
+[x] winston configuring - 1
+[x] wildcard routes - 1
 [ ] api logging - 0
 [ ] unit testing
 [ ] mongoose testing
@@ -13,10 +14,21 @@
 
 
 [2]Controller
-
-[ ] request validation(joy) - 0
+[ ] request validation(joy) - 0 (next)
 
 
 [3] Key Feature 
 
 [ ] Scanning QR codes rather than providing tabs for each restaurant tables.
+
+[4] Business Logic Implementation
+
+[ ] user model
+[ ] user registration
+[ ] user authentication
+[ ] user profile
+[ ] user profile update
+[ ] user profile delete
+[ ] user profile search by
+[ ] 
+[ ] user authorization
