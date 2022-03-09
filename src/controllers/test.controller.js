@@ -4,6 +4,8 @@ const TestService = require("../services/test.service");
 const appResponse = require("../models/responses/application.response");
 const ApplicationError = require("../models/errors/application.error");
 const NotFoundError = require("../models/errors/client-errors/not-found.error");
+const { TestValidationSchema } = require("../models/schemas/test.schema");
+const BadRequestError = require("../models/errors/client-errors/bad-request.error");
 class TestController {
     constructor() {
         this.service = Container.get(TestService);
@@ -24,6 +26,10 @@ class TestController {
     }
 
     async post(req, res) {
+
+        let validator = TestValidationSchema.validate(req.body);
+        if(validator.error) throw new BadRequestError(validator.error.details[0].message);
+
         let object = await this.service.addObject(req.body);
         appResponse.send(res, object, httpStatusCodes.SUCCESS.OK);
     }

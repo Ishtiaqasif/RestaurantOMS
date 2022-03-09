@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const BaseEntity = require('./bases/base.entity');
 
 class Test
@@ -9,6 +10,12 @@ class Test
             metadata: BaseEntity.getBaseSchema(),
         }
     } 
+    static getValidationSchema(){
+        return {
+            name: Joi.string().required(),
+            description: Joi.string().required()
+        }
+    }
     static getInitializedObject(){ 
         return {
             name: "",

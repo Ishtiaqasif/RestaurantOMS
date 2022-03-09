@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-const TestSchema  = require('../models/schemas/test.schema');
+const {TestSchema}  = require('../models/schemas/test.schema');
 const Test = require('../models/entities/test.entity');
 const BaseRepository  = require('./base.repository');
 

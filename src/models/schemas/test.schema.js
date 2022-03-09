@@ -1,6 +1,6 @@
+const Joi = require("joi");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const BaseEntity = require("../entities/bases/base.entity");
 const Test = require("../entities/test.entity");
 
 const TestSchema = new Schema(Test.getSchema(), 
@@ -12,4 +12,6 @@ const TestSchema = new Schema(Test.getSchema(),
     },
 });
 
-module.exports = TestSchema;
+const TestValidationSchema = Joi.object(Test.getValidationSchema());
+
+module.exports = {TestSchema, TestValidationSchema};
