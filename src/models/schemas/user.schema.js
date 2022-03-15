@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const UserEntity = require("../entities/user.entity");
 
-const UserSchema = new Schema(UserEntity.getSchema(), 
+const UserSchema = new Schema(UserEntity.getDbSchema(), 
 {
     writeConcern: {
         w: "majority",
@@ -12,6 +12,6 @@ const UserSchema = new Schema(UserEntity.getSchema(),
     },
 });
 
-const UserValidationSchema = Joi.object(UserEntity.getValidationSchema());
+//const UserValidationSchema = Joi.object(UserEntity.getValidationSchema());
 
-module.exports = {UserSchema, UserValidationSchema};
+module.exports = {UserSchema, /*UserValidationSchema*/};

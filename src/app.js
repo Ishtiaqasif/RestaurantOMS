@@ -9,6 +9,8 @@ const TestRepository = require("./repositories/test.repository");
 const { appRouter } = require("./routes/app.router");
 const { errorLogger, errorHandler } = require("./middleware/error-handler.middleware");
 const connectDb = require("./config/dbConnection.config");
+const UserRepository = require("./repositories/user.repository");
+const UserService = require("./services/user.service");
 
 //express
 const app = express();
@@ -18,7 +20,10 @@ connectDb();
 
 //dependency injections
 Container.set(TestRepository, new TestRepository());
+Container.set(UserRepository, new UserRepository());
+
 Container.set(TestService, new TestService());
+Container.set(UserService, new UserService());
 
 //middlewares
 app.use(express.json());

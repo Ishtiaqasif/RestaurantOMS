@@ -1,7 +1,5 @@
 const TestRepository = require("../repositories/test.repository");
 const { Container } = require("typedi");
-const Test = require("../models/entities/test.entity");
-const BaseEntity = require("../models/entities/bases/base.entity");
 
 class TestService
 {

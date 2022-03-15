@@ -1,30 +1,43 @@
 const Joi = require('joi');
+const { Schema } = require('mongoose');
 const BaseEntity = require('./bases/base.entity');
 
 class User
 {
     static ContactSchema = new Schema({  // contact array cannot be limited
-        contactone: {
+        contact: {
            type: String,
-           required: [true, 'Contact number is required'],
-           max: 11,
-           match: /^(A|B|AB|O)[+-]$/i, //correct regex
-        },
-        contactTwo: {
-            type: String,
-            max: 11,
-            match: /^(A|B|AB|O)[+-]$/i, //correct regex
-         }
+           max: 15,
+           //match: /(^(+88|0088)?(01){1}[3456789]{1}(\d){8})$/
+        }
     });
 
-    static getSchema(){
-        return {
-            email: { // unique:true 
+    static getDbSchema(){
+        let dbSchema =  {
+            email: { 
                 type: String,
                 required: [true, 'Email is required'],
                 trim: true,
                 lowercase: true,
                 match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+                validate: {
+                    isAsync: true,
+                    validator: (value, isValid) => {
+                        return this.constructor.findOne({ user: value })
+                        .exec((err, user)=>{
+                            
+                            if(err) throw err;
+                            
+                            if(user) {
+                                if(this.email === user.email) return isValid(true);
+                                return isValid(false);  
+                            }
+                            else return isValid(true);
+        
+                        });
+                    },
+                    message:  'This email is already taken!'
+                },
             },
 
             username:{  //unique:true 
@@ -32,7 +45,27 @@ class User
                 uppercase: true,
                 trim: true,
                 maxLength: [100, 'Must not be more than 100, got {VALUE}'],
-                required: [true, 'Username is required']
+                required: [true, 'Username is required'],
+                validate: {
+                    isAsync: true,
+                    validator: (value, isValid) => {
+                        return this.constructor.findOne({ username: value })
+                        .exec((err, user)=>{
+                            
+                            if(err) throw err;
+                            
+                            return user?
+                                //if(this.username === user.username) return isValid(true);
+                                //return 
+                                isValid(false):
+                            //}
+                            //else return 
+                            isValid(true);
+        
+                        });
+                    },
+                    message:  'This Username is already taken!'
+                },
             },
 
             address: {
@@ -46,18 +79,14 @@ class User
                 match: /^(A|B|AB|O)[+-]$/i,
             },
 
-            dateOfBirth: { // < 1950 && age atleast 10
+            dateOfBirth: {
                 type: Date,
-                max: 100
+                min: '1950-01-01',
+                max: new Date(new Date().setFullYear(new Date().getFullYear() - 10)).toISOString().split('T')[0]
             },
 
-            contact: { ///////
-                type: ContactSchema,
-                trim: true,
-                // max: 11,
-                // match: /^(A|B|AB|O)[+-]$/i, //correct regex
-                required: [true, 'Contact Num is required'],
-                match: /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/,
+            contacts: {
+                type: [this.ContactSchema]
             },
 
             fullName: {
@@ -83,8 +112,8 @@ class User
                 required: [true, 'Password is required']
             },
 
-            adminLavel: { /////
-                type: String, //enum
+            adminLevel: { /////
+                type: Array, //enum
                 maxLength: 100,
                 default: '1',
                 required: [true, 'Admin Role is required']
@@ -99,7 +128,10 @@ class User
                 data: Buffer,
                 contentType: String,
             },
-        }
+        };
+
+        return dbSchema;
+
     } 
     static getValidationSchema(){
         return {

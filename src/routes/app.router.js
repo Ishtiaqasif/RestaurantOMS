@@ -3,7 +3,7 @@ const wildcardRouteHandler = require("../utils/handler-functions.utils");
 
 const healthController = require("../controllers/health.controller");
 const testController = require("../controllers/test.controller");
-const NotFoundError = require("../models/errors/client-errors/not-found.error");
+const userController = require("../controllers/user.controller");
 
 
 router
@@ -20,6 +20,9 @@ router
     .patch("/softdelete/:id", async (req, res) => await new testController().softDelete(req, res))
     ;
 
+router
+    .post("/user",async (req, res) => await new userController().post(req, res))
+    ;
 
 router
     .get("*", wildcardRouteHandler)
